@@ -49,7 +49,7 @@ class TripadCLIsor::CLI
     load_end=Time.now
     puts "Loaded info about #{Destination.all.length} destinations in #{load_end-load_start} seconds."
     puts "HTML Calls: #{scraper.call_count}"
-    sleep(3)
+    sleep(1)
   end
 
 
@@ -57,12 +57,20 @@ class TripadCLIsor::CLI
     system "clear" or system "cls"
     puts "Get Inspired"
     self.hline
+    num_themes=Theme.all.length
     Theme.all.each_with_index do |theme,ind|
-      puts "#{ind+1}. #{theme.name}"
+      puts "#{ind+1}. #{theme.title}"
     end
-    puts "#{Theme.all.length+1}. Back to Main Menu"
+    puts "#{num_themes+1}. Back to Main Menu"
 
-    choice = gets.split.to_i
+    choice = gets.strip.to_i
+
+    if choice.between?(1,num_themes)
+      dest=Theme.all[choice-1]
+      puts "You done picked #{dest.name}."
+    elsif choice==num_themes+1
+      self.main_menu
+    end
 
   end
 
