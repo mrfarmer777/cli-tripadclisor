@@ -81,9 +81,9 @@ class Scraper
 
 
   #Scrapes populates hotels for a selected destination
-  def populate_hotels(dest_url)
-    title_url="#{@base_url}#{dest_url}"
-    doc=get_node_list(title_url)
+  def populate_hotels(dest)
+    target_url="#{@base_url}#{dest.page_url}"
+    doc=get_node_list(target_url)
 
     hotel_cards=doc.css('.main_col')
     hotel_cards.each do |hotel|
@@ -100,7 +100,8 @@ class Scraper
       end
       hotel_hash={name: name, best_vendor:best_vendor, best_price: best_price, other_offers:other_offers}
       #binding.pry
-      Hotel.new(hotel_hash)
+      hotel=Hotel.new(hotel_hash)
+      dest.hotels<<hotel
     end
   end
 

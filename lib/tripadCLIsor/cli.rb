@@ -31,7 +31,7 @@ class TripadCLIsor::CLI
     #Consider refactoring to re-usable menu function
     case choice
     when 1
-      self.select_dest_view
+      self.rand_dest_view
     when 2
       self.all_themes_view
     when 3
@@ -80,7 +80,7 @@ class TripadCLIsor::CLI
     puts "---------------------------------------------"
   end
 
-  def select_dest_view
+  def rand_dest_view
     system "clear" or system "cls"
     puts "Search Selected Destinations"
     self.hline
@@ -120,7 +120,7 @@ def theme_view(theme)
 
   if choice.between?(1,num_items)
     dest=Theme.all[choice-1]
-    #scraper.process_destination
+    #scraper.populate_hotels
   elsif choice==num_items+1
     self.main_menu
   end

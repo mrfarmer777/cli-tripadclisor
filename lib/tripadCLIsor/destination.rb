@@ -1,5 +1,5 @@
 class Destination
-  attr_accessor :page_url, :hotels
+  attr_accessor :page_url, :hotels, :themes
   attr_reader :name
 
   @@all=[]
@@ -8,6 +8,7 @@ class Destination
     @name=dest_hash[:name]
     @page_url=dest_hash[:page_url]
     @hotels=[]
+    @themes=[]
     self.save
   end
 
