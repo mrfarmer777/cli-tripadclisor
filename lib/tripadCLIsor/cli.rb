@@ -11,6 +11,9 @@ class TripadCLIsor::CLI
 
     #User Greeting
     puts "Welcome to TripadCLIsor\nYour way to find a hotel, in the Command Line\n"
+
+    #consider doing the scraping, processing, and setting up here, then allow user to do some stuff
+
     puts "How would you like to search? \n1. Search By City \n2. Inspire Me!"
 
     #getting user input as an integer

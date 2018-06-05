@@ -5,5 +5,4 @@ require './lib/tripadCLIsor'
 
 #let's get the ball rolling...
 #This is the CLI Controller
-
 TripadCLIsor::CLI.new.call
