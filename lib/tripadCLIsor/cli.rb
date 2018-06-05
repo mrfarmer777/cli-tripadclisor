@@ -9,10 +9,12 @@ class TripadCLIsor::CLI
 
     scraper=Scraper.new   #initializing scraper instance
 
+
     #User Greeting
     puts "Welcome to TripadCLIsor\nYour way to find a hotel, in the Command Line\n"
 
     #consider doing the scraping, processing, and setting up here, then allow user to do some stuff
+    scraper.process_inspiration #while we're reading....
 
     puts "How would you like to search? \n1. Search By City \n2. Inspire Me!"
 
@@ -26,7 +28,7 @@ class TripadCLIsor::CLI
       puts "Let's search by city"
     when 2
       puts "Let's get inspired"
-      scraper.process_inspiration
+      Theme.readout
     else
       puts "Please enter a valid choice."
     end

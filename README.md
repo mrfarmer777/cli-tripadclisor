@@ -1,8 +1,17 @@
 # TripadCLIsor
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tripadCLIsor`. To experiment with that code, run `bin/console` for an interactive prompt.
+Do you need to book a highly-ranked hotel, but you're tired of all the dizzying colors and non-serifed fonts of the modern web?
+Search for your lodging in the monospace-riddled comfort of the Command Line with TripadCLIsor! We hope you're a satisfied CLIent.
 
-TODO: Delete this and the text above, and describe your gem
+TODO:
+-clean up Theme CLI menu
+-build Destination scraper
+-build Destination class
+-build Hotel class
+-link Destinations and Themes through Hotels
+-consider adding in menu drawing and handling methods in the CLI controller class
+-integrate with scraper for other site
+
 
 ## Installation
 

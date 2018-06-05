@@ -1,11 +1,16 @@
 require 'pry'
 
 class Theme
-  attr_accessor :title, :destinations, :page_url, :ex_destinations
+  attr_accessor :title, :destinations, :page_url, :ex_dest
 
   @@all=[]
 
-  def initialize(theme_div)
+  def initialize(theme_hash)
+    #decided to take in a hash here made by the scraper, reduce dependencies on nokogiri, keeps html away from this object. Best practice?
+    @title=theme_hash[:title]
+    @page_url=theme_hash[:page_url]
+    @ex_dest=theme_hash[:ex_dest]
+    self.save #adds theme instance to class variable @@all
   end
 
   def self.all
@@ -18,6 +23,12 @@ class Theme
 
   def self.destroy_all
     @@all.clear
+  end
+
+  def self.readout
+    @@all.each do |theme|
+      puts "#{theme.title} - Example Destinations: #{theme.ex_dest}, Page Url: #{theme.page_url}"
+    end
   end
 
 
