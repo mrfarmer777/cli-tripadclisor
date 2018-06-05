@@ -10,6 +10,7 @@ class Theme
     @title=theme_hash[:title]
     @page_url=theme_hash[:page_url]
     @ex_dest=theme_hash[:ex_dest]
+    @destinations=[]
     self.save #adds theme instance to class variable @@all
   end
 

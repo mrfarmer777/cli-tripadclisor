@@ -28,7 +28,7 @@ class Scraper
 
 
   #Scrapes the inspiration page and create new hashes that are passed to the Theme.new method
-  def process_inspiration
+  def populate_themes
     doc=get_node_list("#{@base_url}/inspiration") #get the nodelist
     themes=doc.css(".shelf_container")
 
@@ -56,12 +56,13 @@ class Scraper
 
 
   #Scrapes a theme page and creates new destinations for all those found on the theme page
-  def process_theme(theme_url)
-    target_url="#{@base_url}#{theme_url}"
+  #Theme: is a theme object
+  def populate_destinations(theme)
+    target_url="#{@base_url}#{theme.page_url}"
     doc = get_node_list(target_url)
     #find the appropriate theme, get it here so it can be added to
-    theme_name=doc.css('.ui_header')
-    sel_theme = Theme.find_by_name(theme_name)
+    #theme_name=doc.css('.ui_header')
+    sel_theme = theme
 
 
     dest_divs=doc.css('.ui_poi_thumbnail')
@@ -70,6 +71,7 @@ class Scraper
       page_url=dest.attribute('href').text
       dest_hash={name: name, page_url: page_url}
       Destination.new(dest_hash)
+      theme.destinations<<Destination
     end
     #title selector: .ui_header (text)
     #destination info container: .ui_poi_thumbnail (whole div)
@@ -77,7 +79,9 @@ class Scraper
     #dest name: .name (within the container) text
   end
 
-  def process_destination(dest_url)
+
+  #Scrapes populates hotels for a selected destination
+  def populate_hotels(dest_url)
     title_url="#{@base_url}#{dest_url}"
     doc=get_node_list(title_url)
 
@@ -95,7 +99,8 @@ class Scraper
         other_offers<<offer_data
       end
       hotel_hash={name: name, best_vendor:best_vendor, best_price: best_price, other_offers:other_offers}
-      binding.pry
+      #binding.pry
+      Hotel.new(hotel_hash)
     end
   end
 
