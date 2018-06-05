@@ -5,6 +5,7 @@ require_relative "./tripadCLIsor/cli.rb"
 require_relative "./tripadCLIsor/scraper.rb"
 require_relative "./tripadCLIsor/theme.rb"
 require_relative "./tripadCLIsor/destination.rb"
+require_relative "./tripadCLIsor/hotel.rb"
 
 
 module TripadCLIsor

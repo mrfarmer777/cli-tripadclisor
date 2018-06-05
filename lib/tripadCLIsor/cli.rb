@@ -31,7 +31,7 @@ class TripadCLIsor::CLI
     #Consider refactoring to re-usable menu function
     case choice
     when 1
-      puts "Let's search by city"
+      scraper.process_destination('/Hotels-g147293-Punta_Cana_La_Altagracia_Province_Dominican_Republic-Hotels.html')
     when 2
       self.inspiration_view
     else

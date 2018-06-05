@@ -84,8 +84,8 @@ class Scraper
     hotel_cards=doc.css('.main_col')
     hotel_cards.each do |hotel|
       name=hotel.css('.property_title').text
-      best_vendor=hotel.css('.price_wrap>.provider').text
-      best_price=hotel.css('.price_wrap>.price').text
+      best_vendor=hotel.css('.priceBlock .provider').text
+      best_price=hotel.css('.priceBlock .price').text
       offer_list=hotel.css('.text-links>.text-link')
       other_offers=[]
       offer_list.each do |offer|
@@ -94,6 +94,10 @@ class Scraper
         offer_data=[vendor,price]
         other_offers<<offer_data
       end
+      hotel_hash={name: name, best_vendor:best_vendor, best_price: best_price, other_offers:other_offers}
+      binding.pry
+    end
+  end
 
 
     #hotel info card: .main_col
