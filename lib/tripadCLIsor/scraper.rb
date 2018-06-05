@@ -41,6 +41,7 @@ class Scraper
       end
       theme_hash={title:title, page_url:page_url, ex_dest:destinations}
       Theme.new(theme_hash) #initialize a new Theme instance
+      #binding.pry
     end
     #Element selectors
     #inspiration theme containers: ".shelf_container"
@@ -48,6 +49,14 @@ class Scraper
     #inspiration links: .ui_link .title_text (get the href attribute text)
     #insp destination container: .shelf_item_container>div (holds pictures of each destination within)
     #destination title:
+
+  end
+
+  def process_theme(theme_url)
+    target_url="#{@base_url}#{theme_url}"
+    doc = get_node_list(target_url)
+    #find the appropriate theme, get it here so it can be added to
+
 
   end
 

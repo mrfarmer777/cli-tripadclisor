@@ -31,6 +31,14 @@ class Theme
     end
   end
 
+  #need a search by name method
+  def self.find_by_name(name)
+    sel_theme=@@all.detect {|theme| theme.title==name}
+  end
+
+
+  #need a method for adding the rest of the destinations to the theme, not just strings
+
 
 
 
