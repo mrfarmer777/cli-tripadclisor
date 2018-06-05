@@ -71,19 +71,39 @@ class Scraper
       dest_hash={name: name, page_url: page_url}
       Destination.new(dest_hash)
     end
-
-
-
-
-
     #title selector: .ui_header (text)
     #destination info container: .ui_poi_thumbnail (whole div)
     #distination link: (href attribute for the destination div)
     #dest name: .name (within the container) text
-
-
-
   end
+
+  def process_destination(dest_url)
+    title_url="#{@base_url}#{dest_url}"
+    doc=get_node_list(title_url)
+
+    hotel_cards=doc.css('.main_col')
+    hotel_cards.each do |hotel|
+      name=hotel.css('.property_title').text
+      best_vendor=hotel.css('.price_wrap>.provider').text
+      best_price=hotel.css('.price_wrap>.price').text
+      offer_list=hotel.css('.text-links>.text-link')
+      other_offers=[]
+      offer_list.each do |offer|
+        vendor=offer.css('.vendor').text
+        price=offer.css('.price').text
+        offer_data=[vendor,price]
+        other_offers<<offer_data
+      end
+
+
+    #hotel info card: .main_col
+    #hotel name: .property_title
+    #best price: .price .__resizeWatch
+    #other prices: .text-links
+    #single price: .text-link
+    #Vendor: .vendor (within single price)
+    #price: .price (within single price)
+
 
 
 
