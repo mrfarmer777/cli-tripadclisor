@@ -4,7 +4,7 @@ require 'nokogiri'
 require 'open-uri'
 
 #NOTES
-#by convention, urls will include a / when they are further extensible
+#by convention, url extensions will include slash as first character, that's how they're stored by Tripadvisor
 
 
 
@@ -14,7 +14,7 @@ class Scraper
   attr_reader :base_url
 
   def initialize
-    @base_url="https://www.tripadvisor.com/"
+    @base_url="https://www.tripadvisor.com"
   end
 
   def get_node_list(url)
@@ -27,7 +27,7 @@ class Scraper
 
   #Process the inspiration page and create new hashes that are passed to the Theme.new method
   def process_inspiration
-    doc=get_node_list("#{@base_url}inspiration") #get the nodelist
+    doc=get_node_list("#{@base_url}/inspiration") #get the nodelist
     themes=doc.css(".shelf_container")
 
     themes.each do |theme| #build a hash for each theme, use it create an instance of Theme class
@@ -56,6 +56,27 @@ class Scraper
     target_url="#{@base_url}#{theme_url}"
     doc = get_node_list(target_url)
     #find the appropriate theme, get it here so it can be added to
+    theme_name=doc.css('.ui_header')
+    sel_theme = Theme.find_by_name(theme_name)
+
+
+    dest_divs=doc.css('.ui_poi_thumbnail')
+    dest_divs.each do |dest|
+      name=dest.css('.name').text
+      page_url=dest.attribute('href').text
+      dest_hash={name: name, page_url: page_url}
+      Destination.new(dest_hash)
+    end
+    binding.pry
+
+
+
+
+    #title selector: .ui_header (text)
+    #destination info container: .ui_poi_thumbnail (whole div)
+    #distination link: (href attribute for the destination div)
+    #dest name: .name (within the container) text
+
 
 
   end

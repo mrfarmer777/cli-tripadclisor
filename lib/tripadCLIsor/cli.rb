@@ -15,7 +15,8 @@ class TripadCLIsor::CLI
 
     #consider doing the scraping, processing, and setting up here, then allow user to do some stuff
     scraper.process_inspiration #while we're reading....
-
+    test_theme_url=Theme.all[0].page_url
+    scraper.process_theme(test_theme_url)
     puts "How would you like to search? \n1. Search By City \n2. Inspire Me!"
 
     #getting user input as an integer
