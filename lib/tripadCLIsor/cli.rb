@@ -10,16 +10,18 @@ class TripadCLIsor::CLI
   def call
 
     @scraper=Scraper.new   #initializing scraper instance
+    system "clear" or system "cls"
+    self.load_inspiration_themes
+    self.main_menu
+  end
 
+  def main_menu
+    system "clear" or system "cls"
 
     #User Greeting
     puts "Welcome to TripadCLIsor\nYour way to find a hotel, in the Command Line\n"
-
-    #consider doing the scraping, processing, and setting up here, then allow user to do some stuff
-    #scraper.process_inspiration #while we're reading....
-    #test_theme_url=Theme.all[0].page_url
-    #scraper.process_theme(test_theme_url)
-    self.load_inspiration_themes
+    self.hline
+    #scrapes all themes and instantiates their destinations
     puts "How would you like to search? \n1. Search By City \n2. Inspire Me!"
 
     #getting user input as an integer
@@ -31,21 +33,41 @@ class TripadCLIsor::CLI
     when 1
       puts "Let's search by city"
     when 2
-      puts "Let's get inspired"
-      Theme.readout
+      self.inspiration_view
     else
       puts "Please enter a valid choice."
     end
   end
 
   def load_inspiration_themes
-    puts "Let's get scrapin... #{Time.now}"
+    load_start=Time.now
+    puts "Loading much info..."
     @scraper.process_inspiration
     Theme.all.each do |theme|
       @scraper.process_theme(theme.page_url)
     end
-    puts "we done scrapin. #{Time.now}"
+    load_end=Time.now
+    puts "Loaded info about #{Destination.all.length} destinations in #{load_end-load_start} seconds."
+    puts "HTML Calls: #{scraper.call_count}"
+    sleep(3)
   end
 
+
+  def inspiration_view
+    system "clear" or system "cls"
+    puts "Get Inspired"
+    self.hline
+    Theme.all.each_with_index do |theme,ind|
+      puts "#{ind+1}. #{theme.name}"
+    end
+    puts "#{Theme.all.length+1}. Back to Main Menu"
+
+    choice = gets.split.to_i
+
+  end
+
+  def hline
+    puts "---------------------------------------------"
+  end
 
 end

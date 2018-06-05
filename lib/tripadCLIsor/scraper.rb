@@ -10,22 +10,24 @@ require 'open-uri'
 
 class Scraper
 
-  attr_accessor :target_url
+  attr_accessor :target_url, :call_count #as yet, unused
   attr_reader :base_url
 
   def initialize
     @base_url="https://www.tripadvisor.com"
+    @call_count=0
   end
 
+  #All-purpose scraping method for getting the Nokogiri Node List
   def get_node_list(url)
-    #returns a Nokogirl nodelist object that can be parsed by apprpriate function
-    @target_url=url
+
     html=open(url)
+    @call_count+=1
     doc=Nokogiri::HTML(html)
   end
 
 
-  #Process the inspiration page and create new hashes that are passed to the Theme.new method
+  #Scrapes the inspiration page and create new hashes that are passed to the Theme.new method
   def process_inspiration
     doc=get_node_list("#{@base_url}/inspiration") #get the nodelist
     themes=doc.css(".shelf_container")
@@ -52,6 +54,8 @@ class Scraper
 
   end
 
+
+  #Scrapes a theme page and creates new destinations for all those found on the theme page
   def process_theme(theme_url)
     target_url="#{@base_url}#{theme_url}"
     doc = get_node_list(target_url)
@@ -67,7 +71,7 @@ class Scraper
       dest_hash={name: name, page_url: page_url}
       Destination.new(dest_hash)
     end
-    binding.pry
+
 
 
 
