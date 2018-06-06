@@ -5,9 +5,12 @@ Search for your lodging in the monospace-riddled comfort of the Command Line wit
 
 TODO:
 -speed up/hide scraping methods
--fix duplicate destination creation
--check and debug menu flow/UI
--integrate with scraper for other site
+-improve documentation on cli
+-implement modules for searching and linking
+
+
+
+
 
 
 ## Installation
