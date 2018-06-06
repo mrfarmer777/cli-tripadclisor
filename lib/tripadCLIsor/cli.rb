@@ -34,8 +34,6 @@ class TripadCLIsor::CLI
       self.rand_dest_view
     when 2
       self.all_themes_view
-    when 3
-      scraper.process_destination('/Hotels-g147293-Punta_Cana_La_Altagracia_Province_Dominican_Republic-Hotels.html')
     else
       puts "Please enter a valid choice."
     end
@@ -99,7 +97,7 @@ class TripadCLIsor::CLI
       dest=sel_cities[choice-1]
       puts "You done picked #{dest.name}."
     elsif choice==num_dest+1
-      self.city_view
+      self.rand_dest_view
     elsif choice==num_dest+2
       self.main_menu
     end
@@ -124,6 +122,7 @@ def theme_view(theme)
   elsif choice==num_items+1
     self.main_menu
   end
+end
 
 
 
