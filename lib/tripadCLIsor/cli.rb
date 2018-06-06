@@ -5,10 +5,9 @@ require "./lib/tripadCLIsor.rb"
 #adds CLI in the TripadCLIsor namespace
 class TripadCLIsor::CLI
 
-  attr_accessor :scraper
+  attr_accessor :scraper, :active_dest, :active_theme
 
   def call
-
     @scraper=Scraper.new   #initializing scraper instance
     system "clear" or system "cls"
     self.load_inspiration_themes
@@ -119,7 +118,7 @@ class TripadCLIsor::CLI
     choice = gets.strip.to_i
 
     if choice.between?(1,num_items)
-      dest=Theme.all[choice-1]
+      dest=theme.destinations[choice-1]
       scraper.populate_hotels(dest)
       self.dest_view(dest)
     elsif choice==num_items+1
@@ -142,12 +141,39 @@ class TripadCLIsor::CLI
 
     if choice.between?(1,num_items)
       hotel=dest.hotels[choice-1]
-      scraper.view_hotel(dest)
-
+      hotel_view(hotel)
     elsif choice==num_items+1
       self.main_menu
     end
   end
+
+  def hotel_view(hotel)
+    waiting=true
+    while waiting
+      system "clear" or system "cls"
+      puts "Now Viewing: #{hotel.name}"
+      self.hline
+      puts "Best Price: #{hotel.best_price} (from #{hotel.best_vendor})"
+      puts "Other Offers:"
+      hotel.other_offers.each do |offer_arr|
+        "\t#{offer_arr[0]}: #{offer_arr[1]}"
+      end
+      puts "\n\n1. Back to (M)ain Menu"
+      waiting=true
+
+
+      choice = gets.strip
+
+      if choice.downcase=="m" || choice.to_i == 1
+        self.main_menu
+        waiting=false
+      else
+        "Please select a valid option"
+        waiting=true
+      end
+    end
+  end
+
 
 
 end
