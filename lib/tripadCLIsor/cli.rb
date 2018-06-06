@@ -48,8 +48,8 @@ class TripadCLIsor::CLI
     load_end=Time.now
     puts "Loaded info about #{Destination.all.length} destinations in #{load_end-load_start} seconds."
     puts "HTML Calls: #{scraper.call_count}"
-    sleep(3)
-    binding.pry
+    sleep(1)
+
   end
 
 
@@ -154,6 +154,7 @@ class TripadCLIsor::CLI
       puts "Now Viewing: #{hotel.name}"
       puts @active_dest.name
       self.hline
+      #puts "Rating: #{hotel.rating}/5.0"
       puts "Best Price: #{hotel.best_price} (from #{hotel.best_vendor})"
       puts "Other Offers:"
       hotel.other_offers.each do |offer_arr|

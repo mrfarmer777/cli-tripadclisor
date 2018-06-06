@@ -90,6 +90,15 @@ class Scraper
       name=hotel.css('.property_title').text
       best_vendor=hotel.css('.priceBlock .provider').text
       best_price=hotel.css('.priceBlock .price').text
+
+      #implement rating scrape here
+      rating=0
+      #rate_class=hotel.css('.ui_bubble_rating').attribute('class').text.match(/\d+/)
+      #working around bug that hangs when a rating div is not found properly
+      #if rate_class !=nil
+        #rating=rate_class[0]
+      #end
+
       offer_list=hotel.css('.text-links>.text-link')
       other_offers=[]
       offer_list.each do |offer|
@@ -98,7 +107,7 @@ class Scraper
         offer_data=[vendor,price]
         other_offers<<offer_data
       end
-      hotel_hash={name: name, best_vendor:best_vendor, best_price: best_price, other_offers:other_offers}
+      hotel_hash={name: name, best_vendor:best_vendor, best_price: best_price, other_offers:other_offers, rating:rating}
       #binding.pry
       hotel=Hotel.new(hotel_hash)
       dest.hotels<<hotel

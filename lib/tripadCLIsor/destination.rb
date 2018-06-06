@@ -12,6 +12,14 @@ class Destination
     self.save
   end
 
+  def add_theme(theme)
+    self.themes<<theme
+  end
+
+  def add_hotel(hotel)
+    self.hotels<<hotel
+  end
+
   def save
     @@all<<self
   end

@@ -1,5 +1,5 @@
 class Hotel
-  attr_accessor :best_price, :best_vendor, :other_offers, :destination, :theme
+  attr_accessor :best_price, :best_vendor, :other_offers, :destination, :theme, :rating
   attr_reader :name
 
   @@all=[]
