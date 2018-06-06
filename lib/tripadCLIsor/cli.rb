@@ -44,7 +44,8 @@ class TripadCLIsor::CLI
     puts "Loading much info..."
     @scraper.populate_themes
     Theme.all.each do |theme|
-      @scraper.populate_destinations(theme)
+      temp_scrape=Scraper.new
+      temp_scrape.populate_destinations(theme)
     end
     load_end=Time.now
     puts "Loaded info about #{Destination.all.length} destinations in #{load_end-load_start} seconds."
@@ -95,7 +96,8 @@ class TripadCLIsor::CLI
 
     if choice.between?(1,num_dest)
       dest=sel_cities[choice-1]
-      puts "You done picked #{dest.name}."
+      scraper.populate_hotels(dest)
+      self.dest_view(dest)
     elsif choice==num_dest+1
       self.rand_dest_view
     elsif choice==num_dest+2
@@ -104,26 +106,47 @@ class TripadCLIsor::CLI
 
   end
 
-def theme_view(theme)
-  system "clear" or system "cls"
-  puts "Showing Destinations for '#{theme.title}' "
-  self.hline
-  num_items=theme.destinations.length
-  theme.destination.each_with_index do |dest,ind|
-    puts "#{ind+1}. #{dest.name} - #{dest.hotels.length} Hotels"
+  def theme_view(theme)
+    system "clear" or system "cls"
+    puts "Showing Destinations for '#{theme.title}' "
+    self.hline
+    num_items=theme.destinations.length
+    theme.destination.each_with_index do |dest,ind|
+      puts "#{ind+1}. #{dest.name} - #{dest.hotels.length} Hotels"
+    end
+    puts "#{num_items+1}. Back to Main Menu"
+
+    choice = gets.strip.to_i
+
+    if choice.between?(1,num_items)
+      dest=Theme.all[choice-1]
+      scraper.populate_hotels(dest)
+      self.dest_view(dest)
+    elsif choice==num_items+1
+      self.main_menu
+    end
   end
-  puts "#{num_items+1}. Back to Main Menu"
 
-  choice = gets.strip.to_i
+  def dest_view(dest)
+    system "clear" or system "cls"
+    puts "Showing Hotels for '#{dest.name}' "
+    self.hline
+    num_items=dest.hotels.length
+    dest.hotels.each_with_index do |hotel,ind|
+      puts "#{ind+1}.\t#{hotel.name}\t\t#{hotel.best_price}/night"
+    end
+    puts "#{num_items+1}. Back to Main Menu"
 
-  if choice.between?(1,num_items)
-    dest=Theme.all[choice-1]
-    #scraper.populate_hotels
-  elsif choice==num_items+1
-    self.main_menu
+    choice = gets.strip.to_i
+
+    if choice.between?(1,num_items)
+      hotel=dest.hotels[choice-1]
+      scraper.view_hotel(dest)
+
+    elsif choice==num_items+1
+      self.main_menu
+    end
   end
-end
-
 
 
 end
