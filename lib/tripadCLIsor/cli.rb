@@ -66,8 +66,8 @@ class TripadCLIsor::CLI
     choice = gets.strip.to_i
 
     if choice.between?(1,num_themes)
-      theme=Theme.all[choice-1]
-      self.theme_view(theme)
+      @active_theme=Theme.all[choice-1]
+      self.theme_view(@active_theme)
     elsif choice==num_themes+1
       self.main_menu
     end
@@ -94,9 +94,9 @@ class TripadCLIsor::CLI
     choice = gets.strip.to_i
 
     if choice.between?(1,num_dest)
-      dest=sel_cities[choice-1]
-      scraper.populate_hotels(dest)
-      self.dest_view(dest)
+      @active_dest=sel_cities[choice-1]
+      scraper.populate_hotels(@active_dest)
+      self.dest_view(@active_dest)
     elsif choice==num_dest+1
       self.rand_dest_view
     elsif choice==num_dest+2
@@ -118,9 +118,9 @@ class TripadCLIsor::CLI
     choice = gets.strip.to_i
 
     if choice.between?(1,num_items)
-      dest=theme.destinations[choice-1]
-      scraper.populate_hotels(dest)
-      self.dest_view(dest)
+      @active_dest=theme.destinations[choice-1]
+      scraper.populate_hotels(@active_dest)
+      self.dest_view(@active_dest)
     elsif choice==num_items+1
       self.main_menu
     end
@@ -152,6 +152,7 @@ class TripadCLIsor::CLI
     while waiting
       system "clear" or system "cls"
       puts "Now Viewing: #{hotel.name}"
+      puts @active_dest.name
       self.hline
       puts "Best Price: #{hotel.best_price} (from #{hotel.best_vendor})"
       puts "Other Offers:"
@@ -159,6 +160,7 @@ class TripadCLIsor::CLI
         "\t#{offer_arr[0]}: #{offer_arr[1]}"
       end
       puts "\n\n1. Back to (M)ain Menu"
+      puts "2. Back to All (D)estination Hotels"
       waiting=true
 
 
@@ -166,6 +168,9 @@ class TripadCLIsor::CLI
 
       if choice.downcase=="m" || choice.to_i == 1
         self.main_menu
+        waiting=false
+      elsif choice.downcase=="d" || choice.to_i==2
+        self.dest_view(@active_dest)
         waiting=false
       else
         "Please select a valid option"

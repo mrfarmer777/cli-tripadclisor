@@ -25,15 +25,7 @@ class Hotel
     @@all
   end
 
-  def readout
-    puts "#{self.name}"
-    puts "---------------------------------------------"
-    puts "Best Price: #{self.best_price} (from #{self.best_vendor})"
-    puts "Other Offers:"
-    self.other_offers.each do |offer_arr|
-      "\t#{offer_arr[0]}: #{offer_arr[1]}"
-    end
-  end
+
 
 
 end
