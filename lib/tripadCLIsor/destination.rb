@@ -21,19 +21,16 @@ class Destination
   end
 
   def self.find_by_name(name)
-    @@all.each do |dest|
-      if dest.name==name
-        dest
-      end
-    end
-    nil
+    @@all.detect { |dest| dest.name==name}
   end
 
   def self.find_or_create_by_hash(dest_hash)
     dest=Destination.find_by_name(dest_hash[:name])
+    #binding.pry
     if dest==nil
       dest=Destination.new(dest_hash)
     end
+    #binding.pry
     dest
   end
 
