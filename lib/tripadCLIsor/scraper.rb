@@ -62,7 +62,6 @@ class Scraper
     doc = get_node_list(target_url)
     #find the appropriate theme, get it here so it can be added to
     #theme_name=doc.css('.ui_header')
-    sel_theme = theme
 
 
     dest_divs=doc.css('.ui_poi_thumbnail')
@@ -70,8 +69,9 @@ class Scraper
       name=dest.css('.name').text
       page_url=dest.attribute('href').text
       dest_hash={name: name, page_url: page_url}
-      Destination.new(dest_hash)
-      theme.destinations<<Destination
+      dest=Destination.find_or_create_by_hash(dest_hash)
+
+      theme.destinations<<dest
     end
     #title selector: .ui_header (text)
     #destination info container: .ui_poi_thumbnail (whole div)

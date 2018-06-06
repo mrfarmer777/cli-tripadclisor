@@ -41,11 +41,10 @@ class TripadCLIsor::CLI
 
   def load_inspiration_themes
     load_start=Time.now
-    puts "Loading much info..."
+    puts "Loading destinations and themes..."
     @scraper.populate_themes
     Theme.all.each do |theme|
-      temp_scrape=Scraper.new
-      temp_scrape.populate_destinations(theme)
+      @scraper.populate_destinations(theme)
     end
     load_end=Time.now
     puts "Loaded info about #{Destination.all.length} destinations in #{load_end-load_start} seconds."
@@ -111,8 +110,8 @@ class TripadCLIsor::CLI
     puts "Showing Destinations for '#{theme.title}' "
     self.hline
     num_items=theme.destinations.length
-    theme.destination.each_with_index do |dest,ind|
-      puts "#{ind+1}. #{dest.name} - #{dest.hotels.length} Hotels"
+    theme.destinations.each_with_index do |dest,ind|
+      puts "#{ind+1}. #{dest.name}"
     end
     puts "#{num_items+1}. Back to Main Menu"
 
@@ -132,10 +131,11 @@ class TripadCLIsor::CLI
     puts "Showing Hotels for '#{dest.name}' "
     self.hline
     num_items=dest.hotels.length
-    dest.hotels.each_with_index do |hotel,ind|
-      puts "#{ind+1}.\t#{hotel.name}\t\t#{hotel.best_price}/night"
+    sorted = dest.hotels.sort_by {|hotel| hotel.best_price}
+    sorted.each_with_index do |hotel,ind|
+      puts "#{ind+1}.  #{hotel.name} (Best Price: #{hotel.best_price}/night)"
     end
-    puts "#{num_items+1}. Back to Main Menu"
+    puts "#{num_items+1}.   Back to Main Menu"
 
     choice = gets.strip.to_i
 

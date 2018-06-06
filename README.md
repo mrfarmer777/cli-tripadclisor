@@ -4,12 +4,9 @@ Do you need to book a highly-ranked hotel, but you're tired of all the dizzying 
 Search for your lodging in the monospace-riddled comfort of the Command Line with TripadCLIsor! We hope you're a satisfied CLIent.
 
 TODO:
--clean up Theme CLI menu
--build Destination scraper
--build Destination class
--build Hotel class
--link Destinations and Themes through Hotels
--consider adding in menu drawing and handling methods in the CLI controller class
+-speed up/hide scraping methods
+-fix duplicate destination creation
+-check and debug menu flow/UI
 -integrate with scraper for other site
 
 
