@@ -56,7 +56,6 @@ class TripadCLIsor::CLI
     puts "Loaded info about #{Destination.all.length} destinations in #{load_end-load_start} seconds."
     puts "HTML Calls: #{scraper.call_count}"
     sleep(1)
-    binding.pry
   end
 
 
@@ -167,7 +166,7 @@ class TripadCLIsor::CLI
       puts "Showing Hotels for '#{dest.name}' "
       self.hline
       num_items=dest.hotels.length
-      sorted = dest.hotels.sort_by {|hotel| hotel.best_price}
+      sorted = dest.hotels.sort_by {|hotel| hotel.name}
       sorted.each_with_index do |hotel,ind|
         puts "#{ind+1}.  #{hotel.name} (Best Price: #{hotel.best_price}/night)"
       end
@@ -176,7 +175,7 @@ class TripadCLIsor::CLI
       choice = gets.strip.to_i
 
       if choice.between?(1,num_items)
-        hotel=dest.hotels[choice-1]
+        hotel=sorted[choice-1]
         hotel_view(hotel)
         waiting=false
       elsif choice==num_items+1
@@ -198,13 +197,16 @@ class TripadCLIsor::CLI
       puts @active_dest.name
       self.hline
       #puts "Rating: #{hotel.rating}/5.0"
-      puts "Best Price: #{hotel.best_price} (from #{hotel.best_vendor})"
+      puts "Best Price: $#{hotel.best_price}/night (from #{hotel.best_vendor})"
       puts "Other Offers:"
       hotel.other_offers.each do |offer_arr|
-        "\t#{offer_arr[0]}: #{offer_arr[1]}"
+        other_vend=offer_arr[0]
+        other_price=offer_arr[1].to_i
+        puts "\t #{other_vend}: $#{other_price}/night"
       end
       puts "\n\n1. Back to (M)ain Menu"
       puts "2. Back to All (D)estination Hotels"
+      binding.pry
 
 
       choice = gets.strip
