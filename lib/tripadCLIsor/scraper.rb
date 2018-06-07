@@ -92,7 +92,7 @@ class Scraper
 
       #implement rating scrape here
       rating=0
-      #rate_class=hotel.css('.ui_bubble_rating').attribute('class').text.match(/\d+/)
+      rate_class=hotel.css('.ui_bubble_rating').attribute('class').text.match(/\d+/)
       #working around bug that hangs when a rating div is not found properly
       #if rate_class !=nil
         #rating=rate_class[0]

@@ -197,8 +197,7 @@ class TripadCLIsor::CLI
       puts @active_dest.name
       self.hline
       #puts "Rating: #{hotel.rating}/5.0"
-      puts "Best Price: $#{hotel.best_price}/night (from #{hotel.best_vendor})"
-      puts "Other Offers:"
+      puts "Price Offers:"
       hotel.other_offers.each do |offer_arr|
         other_vend=offer_arr[0]
         other_price=offer_arr[1].to_i
@@ -206,7 +205,7 @@ class TripadCLIsor::CLI
       end
       puts "\n\n1. Back to (M)ain Menu"
       puts "2. Back to All (D)estination Hotels"
-      binding.pry
+
 
 
       choice = gets.strip
