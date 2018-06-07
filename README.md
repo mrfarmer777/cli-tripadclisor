@@ -1,15 +1,8 @@
 # TripadCLIsor
 
-Do you need to book a highly-ranked hotel, but you're tired of all the dizzying colors and non-serifed fonts of the modern web?
-Search for your lodging in the monospace-riddled comfort of the Command Line with TripadCLIsor! We hope you're a satisfied CLIent.
-
-TODO:
--speed up/hide scraping methods
--improve documentation on cli
--implement modules for searching and linking
-
-
-
+Need a little inspiration for your next trip, but you're tired of all the dizzying colors and non-serifed fonts of the modern web?
+Try getting inspired in the familiar comfort of the Command Line with TripadCLIsor! Choose from over 700 destinations serendipitously
+selected for you or be inspired by themed destinations that strike your fancy.
 
 
 

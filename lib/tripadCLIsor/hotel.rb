@@ -25,6 +25,10 @@ class Hotel
     @@all
   end
 
+  def add_destination(dest)
+    self.destinations<<dest
+  end
+
 
 
 

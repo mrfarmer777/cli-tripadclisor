@@ -71,7 +71,8 @@ class Scraper
       dest_hash={name: name, page_url: page_url}
       dest=Destination.find_or_create_by_hash(dest_hash)
 
-      theme.destinations<<dest
+      theme.add_destination(dest)
+      dest.add_theme(theme)
     end
     #title selector: .ui_header (text)
     #destination info container: .ui_poi_thumbnail (whole div)

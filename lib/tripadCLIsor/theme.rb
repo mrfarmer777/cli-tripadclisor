@@ -41,9 +41,9 @@ class Theme
     sel_theme=@@all.detect {|theme| theme.title==name}
   end
 
-
-  #need a method for adding the rest of the destinations to the theme, not just strings
-
+  def add_destination(dest)
+    self.destinations<<dest
+  end
 
 
 

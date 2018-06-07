@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["'Matt Farmer'"]
   spec.email         = ["'mrfarmer777@gmail.com'"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{A simple CLI program to help find you a hotel in the destination of your dreams.}
+  spec.description   = %q{Need a little inspiration for your next trip, but you're tired of all the dizzying colors and non-serifed fonts of the modern web? Try getting inspired in the familiar comfort of the Command Line with TripadCLIsor! Choose from over 700 destinations serendipitously selected for you or be inspired by themed destinations that strike your fancy.}
+  spec.homepage      = "https://github.com/mrfarmer777/cli-tripadclisor"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
