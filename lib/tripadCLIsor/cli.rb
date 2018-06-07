@@ -56,7 +56,7 @@ class TripadCLIsor::CLI
     puts "Loaded info about #{Destination.all.length} destinations in #{load_end-load_start} seconds."
     puts "HTML Calls: #{scraper.call_count}"
     sleep(1)
-
+    binding.pry
   end
 
 
