@@ -37,6 +37,9 @@ class TripadCLIsor::CLI
       when 2
         self.all_themes_view
         waiting=false
+      when 3
+        waiting=false
+        break
       else
         puts "Please enter a valid choice."
         sleep(1)
@@ -81,7 +84,7 @@ class TripadCLIsor::CLI
         self.main_menu
         waiting=false
       else
-        "please enter a valid choice"
+        puts "Please enter a valid choice"
         sleep(1)
         waiting=true
       end
@@ -122,7 +125,7 @@ class TripadCLIsor::CLI
         self.main_menu
         waiting=false
       else
-        "Please select a valid option"
+        puts "Please select a valid option"
         sleep(1)
         waiting=true
       end
@@ -152,7 +155,7 @@ class TripadCLIsor::CLI
         self.main_menu
         waiting=false
       else
-        "Please select a valid option"
+        puts "Please select a valid option"
         sleep(1)
         waiting=true
       end
@@ -182,7 +185,7 @@ class TripadCLIsor::CLI
         self.main_menu
         waiting=false
       else
-        "Please select a valid option"
+        puts "Please select a valid option"
         sleep(1)
         waiting=true
       end
@@ -217,7 +220,7 @@ class TripadCLIsor::CLI
         self.dest_view(@active_dest)
         waiting=false
       else
-        "Please select a valid option"
+        puts "Please select a valid option"
         sleep(1)
         waiting=true
       end
