@@ -170,9 +170,10 @@ class TripadCLIsor::CLI
       puts "Showing Hotels for '#{dest.name}' "
       self.hline
       num_items=dest.hotels.length
-      sorted = dest.hotels.sort_by {|hotel| hotel.name}
+      sorted = dest.hotels.sort_by {|hotel| hotel.rating}
+      sorted.reverse!
       sorted.each_with_index do |hotel,ind|
-        puts "#{ind+1}.  #{hotel.name} (Best Price: #{hotel.best_price}/night)"
+        puts "#{ind+1}.  #{hotel.name} (Rating: #{hotel.rating}/5.0)"
       end
       puts "#{num_items+1}.   Back to Main Menu"
 
@@ -205,8 +206,8 @@ class TripadCLIsor::CLI
       puts "Price Offers:"
       hotel.other_offers.each do |offer_arr|
         other_vend=offer_arr[0]
-        other_price=offer_arr[1].to_i
-        puts "\t #{other_vend}: $#{other_price}/night"
+        other_price=offer_arr[1]
+        puts "\t #{other_vend}: #{other_price}/night"
       end
       puts "\n\n1. Back to (M)ain Menu"
       puts "2. Back to All (D)estination Hotels"

@@ -14,7 +14,7 @@ class Hotel
       @best_vendor=hotel_hash[:best_vendor]
     end
     @other_offers=hotel_hash[:other_offers]
-    @rating=(hotel_hash[:rating].to_i)/10.0
+    @rating=(hotel_hash[:rating].to_f)
     self.save
   end
 
