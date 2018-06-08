@@ -10,10 +10,11 @@ class Hotel
       @best_price="Unavailable"
       @best_vendor="Unavailable"
     else
-      @best_price=hotel_hash[:best_price].to_i
+      @best_price=hotel_hash[:best_price].gsub("$","").to_i
       @best_vendor=hotel_hash[:best_vendor]
     end
     @other_offers=hotel_hash[:other_offers]
+    @rating=(hotel_hash[:rating].to_i)/10.0
     self.save
   end
 

@@ -92,6 +92,7 @@ class TripadCLIsor::CLI
 
   end
 
+  #Handy method for drawing a horizontal line
   def hline
     puts "---------------------------------------------"
   end
@@ -199,7 +200,8 @@ class TripadCLIsor::CLI
       puts "Now Viewing: #{hotel.name}"
       puts @active_dest.name
       self.hline
-      #puts "Rating: #{hotel.rating}/5.0"
+      puts "Rating: #{hotel.rating}/5.0"
+      puts "Best Price: $#{hotel.best_price}/night (from #{hotel.best_vendor})"
       puts "Price Offers:"
       hotel.other_offers.each do |offer_arr|
         other_vend=offer_arr[0]

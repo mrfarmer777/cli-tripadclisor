@@ -92,11 +92,15 @@ class Scraper
 
       #implement rating scrape here
       rating=0
-      rate_class=hotel.css('.ui_bubble_rating').attribute('class').text.match(/\d+/)
+      rate_class=hotel.css('.ui_bubble_rating')
+      #binding.pry
       #working around bug that hangs when a rating div is not found properly
-      #if rate_class !=nil
-        #rating=rate_class[0]
-      #end
+      if rate_class.length>0
+        rating=rate_class.attribute('alt').text.split(" ")[0]
+      else
+        rating=0
+      end
+
 
       offer_list=hotel.css('.text-links>.text-link')
       other_offers=[]
@@ -112,6 +116,7 @@ class Scraper
       #binding.pry
       hotel=Hotel.new(hotel_hash)
       dest.hotels<<hotel
+
     end
   end
 
