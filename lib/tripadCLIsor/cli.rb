@@ -7,6 +7,7 @@ class TripadCLIsor::CLI
 
   attr_accessor :scraper, :active_dest, :active_theme
 
+  #initiates main loop
   def call
     @scraper=Scraper.new   #initializing scraper instance
     system "clear" or system "cls"
@@ -14,6 +15,8 @@ class TripadCLIsor::CLI
     self.main_menu
   end
 
+  #displays main menu
+  #calls secondary menu
   def main_menu
     waiting=true
     while waiting
@@ -23,7 +26,7 @@ class TripadCLIsor::CLI
       puts "Welcome to TripadCLIsor\nYour way to find a hotel, in the Command Line\n"
       self.hline
       #scrapes all themes and instantiates their destinations
-      puts "How would you like to search? \n1. Selected Destinations \n2. Themed Excursions"
+      puts "How would you like to search? \n1. Selected Destinations \n2. Themed Excursions \n3. Exit TripadCLIsor"
 
       #getting user input as an integer
       choice=gets.strip.to_i
@@ -48,6 +51,8 @@ class TripadCLIsor::CLI
     end
   end
 
+  #Performs Theme and Destination web scraping
+  #Creates Theme and Destination objects through the scraper class
   def load_inspiration_themes
     load_start=Time.now
     puts "Loading destinations and themes..."
@@ -62,6 +67,8 @@ class TripadCLIsor::CLI
   end
 
 
+  #Creates all themes view
+  #Calls tertiary view (destinations)
   def all_themes_view
     waiting=true
     while waiting
@@ -97,6 +104,8 @@ class TripadCLIsor::CLI
     puts "---------------------------------------------"
   end
 
+  #Creates selected destination view
+  #Calls tertiary view (hotels view)
   def rand_dest_view
     waiting=true
     while waiting
@@ -133,6 +142,8 @@ class TripadCLIsor::CLI
     end
   end
 
+  #Creates theme view from Theme object instance
+  #Calls tertiary view (destination)
   def theme_view(theme)
     waiting=true
     while waiting
@@ -163,6 +174,9 @@ class TripadCLIsor::CLI
     end
   end
 
+
+  #Creates destination view from a Destination object instance
+  #Calls tertiary view (hotel)
   def dest_view(dest)
     waiting=true
     while waiting
@@ -194,6 +208,8 @@ class TripadCLIsor::CLI
     end
   end
 
+  #Creates hotel view from Hotel object
+  #Calls secondary view or main menu
   def hotel_view(hotel)
     waiting=true
     while waiting
